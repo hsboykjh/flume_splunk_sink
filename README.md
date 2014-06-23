@@ -3,13 +3,13 @@ flume_splunk_sink
 
 flume sink plug-in for Splunk
 
-Maven build (pom.xml)
+	Maven build (pom.xml)
 
-<dependency>
-	<groupId>splunk</groupId>
-    <artifactId>splunk</artifactId>
-    <version>1.2.2</version>
-</dependency>
+	<dependency>
+	  <groupId>splunk</groupId>
+	  <artifactId>splunk</artifactId>
+	  <version>1.2.2</version>
+	</dependency>
 
 
 Running Script 
