@@ -1,0 +1,41 @@
+# The configuration file needs to define the sources,
+# the channels and the sinks.
+# Sources, channels and sinks are defined per agent,
+# in this case called 'agent'
+
+# agent.sources = seqGenSrc
+agent.sources = http
+agent.channels = memoryChannel
+agent.sinks = splunkSink
+
+#source TCP type for testing using HTTP REST Client
+agent.sources.http.type = http
+agent.sources.http.bind = 0.0.0.0
+agent.sources.http.port = 3333
+agent.sources.http.channels = memoryChannel
+agent.sources.http.handler.nickname = httpsource
+agent.sources.httpsource.handler = org.apache.flume.source.http.JSONHandler
+agent.sources.http.selector.type = replicating
+
+
+# Each sink's type must be defined
+agent.sinks.splunkSink.type = org.apache.flume.sink.SplunkSink
+agent.sinks.splunkSink.batch-size = 100
+agent.sinks.splunkSink.messageSize = 0
+agent.sinks.splunkSink.indexName = main
+agent.sinks.splunkSink.userName = SplunkUserID
+agent.sinks.splunkSink.password = SplunkUserPasswd
+agent.sinks.splunkSink.host = Splunk IP Address (ex: 192.0.0.1)
+agent.sinks.splunkSink.port = Splunk port (ex : 8089)
+
+#Specify the channel the sink should use
+agent.sinks.splunkSink.channel = memoryChannel
+
+# Each channel's type is defined.
+agent.channels.memoryChannel.type = memory
+
+# Other config values specific to each type of channel(sink or source)
+# can be defined as well
+# In this case, it specifies the capacity of the memory channel
+agent.channels.memoryChannel.capacity = 10000
+
